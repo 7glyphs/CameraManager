@@ -1307,6 +1307,9 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
                 currentConnection = stillImageOutput?.connection(with: AVMediaType.video)
             case .videoOnly, .videoWithMic:
                 currentConnection = _getMovieOutput().connection(with: AVMediaType.video)
+                if currentConnection?.isVideoMirroringSupported ?? false {
+                    currentConnection?.isVideoMirrored = (cameraDevice == CameraDevice.front && shouldFlipFrontCameraImage)
+                }
                 if let location = locationManager?.latestLocation {
                     _setVideoWithGPS(forLocation: location)
             }
