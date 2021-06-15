@@ -318,6 +318,9 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         }
     }
     
+    /// Property to set temp video filename
+    open var tempMovieFilename = "tempMovie"
+    
     // Property to get the stabilization mode currently active
     open var activeVideoStabilisationMode: AVCaptureVideoStabilizationMode {
         if let movieOutput = movieOutput {
@@ -368,7 +371,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
     fileprivate var maxZoomScale = CGFloat(1.0)
     
     fileprivate func _tempFilePath() -> URL {
-        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("tempMovie\(Date().timeIntervalSince1970)").appendingPathExtension("mp4")
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(tempMovieFilename)\(Date().timeIntervalSince1970)").appendingPathExtension("mp4")
         return tempURL
     }
     
